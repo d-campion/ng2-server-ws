@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:task="http://www.springframework.org/schema/task" 
+	xmlns:couchbase="http://www.springframework.org/schema/data/couchbase"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:component-scan base-package="com.dimitri.angular" />
+	<context:annotation-config />
+	<tx:annotation-driven />
+	<task:annotation-driven />
+	
+		<!-- Placeholder configuration -->
+
+	<bean id="angularPlaceHolder" class="com.dimitri.angular.core.property.PropertyPlaceHolder">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="locations">
+			<list>
+				<!--Valeur par défaut : fichier du projet-->
+				<value>classpath:/angular-ws-*.properties</value>
+				<!--Surcharge des valeurs par défaut-->
+				<value>file:///${ANGULAR_WS_CONF}/angular-ws-*.properties</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="localOverride" value="true" />
+		<property name="fileEncoding" value="UTF-8"/>
+	</bean>
+</beans>
